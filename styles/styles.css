@@ -1,0 +1,50 @@
+:root {
+  --primaryColor: #3f00ff;
+  --primaryColorLight: #4169e1;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background-color: #dfdbe5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  display: grid;
+  border: 0.75rem solid var(--primaryColor);
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: var(--primaryColorLight);
+}
+
+.board__slot {
+  border: 0.25rem solid var(--primaryColor);
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider {
+  color: #fff;
+  text-align: center;
+  font-size: 3rem;
+}
