@@ -2,11 +2,15 @@ import {
   BOARD_DIMENSIONS,
   SLOT_DIMENSIONS,
   GRID_GAP,
+  PLAYERS,
 } from "../constants/index.js";
 
+import debounceTime from "../utils/debounce.js";
 // State
 
 const filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
+
+let activePlayer = PLAYERS.P1;
 
 // DOM elements
 
@@ -18,7 +22,7 @@ const SLIDER_ELEMENT = document.querySelector(".slider");
 
 BOARD_ELEMENT.addEventListener("mouseover", mouseoverHandler);
 
-BOARD_ELEMENT.addEventListener("click", boardClickHandler);
+BOARD_ELEMENT.addEventListener("click", debounceTime(boardClickHandler, 200));
 
 // Functions
 
@@ -37,6 +41,15 @@ function boardClickHandler(e) {
 }
 
 // Utils
+
+function toggleActivePlayer() {
+  if (activePlayer.name === PLAYERS.P1.name) {
+    activePlayer = { ...PLAYERS.P2 };
+  } else {
+    activePlayer = { ...PLAYERS.P1 };
+  }
+  setSliderColor();
+}
 
 function getSlotNode(i, j) {
   const DIV = document.createElement("div");
@@ -60,11 +73,17 @@ function createBoard() {
   SLIDER_ELEMENT.style.width = SLOT_DIMENSIONS.WIDTH + "rem";
   SLIDER_ELEMENT.style.height = SLOT_DIMENSIONS.HEIGHT + "rem";
 
+  setSliderColor();
+
   for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
     for (let j = 0; j < BOARD_DIMENSIONS.COLUMNS; j++) {
       BOARD_ELEMENT.appendChild(getSlotNode(i, j));
     }
   }
+}
+
+function setSliderColor() {
+  SLIDER_ELEMENT.style.color = activePlayer.color;
 }
 
 function moveSlider(jCoordinate) {
@@ -82,7 +101,8 @@ function computeSlotPosition(jValue) {
 
 function fillSlot(i, j) {
   const slotNode = document.querySelector(`[data-i='${i}'][data-j='${j}']`);
-  slotNode.classList.add("active");
+  slotNode.style.backgroundColor = activePlayer.color;
+  toggleActivePlayer();
 }
 
 // On Load
