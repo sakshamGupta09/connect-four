@@ -6,6 +6,8 @@ import {
 
 // State
 
+const filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
+
 // DOM elements
 
 const BOARD_ELEMENT = document.querySelector(".board");
@@ -14,7 +16,25 @@ const SLIDER_ELEMENT = document.querySelector(".slider");
 
 // Event Listeners
 
+BOARD_ELEMENT.addEventListener("mouseover", mouseoverHandler);
+
+BOARD_ELEMENT.addEventListener("click", boardClickHandler);
+
 // Functions
+
+function mouseoverHandler(e) {
+  if (e.target.classList.contains("board__slot")) {
+    const jCoordinate = e.target.dataset.j;
+    moveSlider(jCoordinate);
+  }
+}
+
+function boardClickHandler(e) {
+  if (e.target.classList.contains("board__slot")) {
+    const jCoordinate = e.target.dataset.j;
+    computeSlotPosition(jCoordinate);
+  }
+}
 
 // Utils
 
@@ -45,6 +65,24 @@ function createBoard() {
       BOARD_ELEMENT.appendChild(getSlotNode(i, j));
     }
   }
+}
+
+function moveSlider(jCoordinate) {
+  const translateBy = jCoordinate * (SLOT_DIMENSIONS.WIDTH + GRID_GAP);
+  SLIDER_ELEMENT.style.transform = `translateX(${translateBy}rem)`;
+}
+
+function computeSlotPosition(jValue) {
+  const rowNumberToFill = BOARD_DIMENSIONS.ROWS - filledColumns[jValue] - 1;
+  if (rowNumberToFill >= 0) {
+    fillSlot(rowNumberToFill, jValue);
+    filledColumns[jValue]++;
+  }
+}
+
+function fillSlot(i, j) {
+  const slotNode = document.querySelector(`[data-i='${i}'][data-j='${j}']`);
+  slotNode.classList.add("active");
 }
 
 // On Load

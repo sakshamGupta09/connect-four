@@ -23,7 +23,6 @@ body {
 .container {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -41,10 +40,17 @@ body {
   background-color: #fff;
   border-radius: 50%;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.board__slot.active {
+  background-color: yellow;
 }
 
 .slider {
   color: #fff;
   text-align: center;
   font-size: 3rem;
+  margin-left: 1.75rem;
+  transition: transform 0.2s ease-in-out;
 }

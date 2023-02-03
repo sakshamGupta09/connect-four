@@ -8,4 +8,4 @@ export const SLOT_DIMENSIONS = {
   HEIGHT : 4,
 };
 
-export const GRID_GAP = 1
+export const GRID_GAP = 0.5
