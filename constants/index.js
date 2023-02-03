@@ -4,8 +4,8 @@ export const BOARD_DIMENSIONS = {
 };
 
 export const SLOT_DIMENSIONS = {
-  WIDTH  : 4,
-  HEIGHT : 4,
+  WIDTH  : 6,
+  HEIGHT : 6,
 };
 
 export const GRID_GAP = 0.5

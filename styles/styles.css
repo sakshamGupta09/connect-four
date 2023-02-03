@@ -50,7 +50,7 @@ body {
 .slider {
   color: #fff;
   text-align: center;
-  font-size: 3rem;
+  font-size: 5rem;
   margin-left: 1.75rem;
   transition: transform 0.2s ease-in-out;
 }
