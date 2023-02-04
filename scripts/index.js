@@ -18,6 +18,8 @@ const BOARD_ELEMENT = document.querySelector(".board");
 
 const SLIDER_ELEMENT = document.querySelector(".slider");
 
+const PLAYER = document.querySelector(".player");
+
 // Event Listeners
 
 BOARD_ELEMENT.addEventListener("mouseover", mouseoverHandler);
@@ -49,6 +51,7 @@ function toggleActivePlayer() {
     activePlayer = { ...PLAYERS.P1 };
   }
   setSliderColor();
+  displayActivePlayer();
 }
 
 function getSlotNode(i, j) {
@@ -73,7 +76,13 @@ function createBoard() {
   SLIDER_ELEMENT.style.width = SLOT_DIMENSIONS.WIDTH + "rem";
   SLIDER_ELEMENT.style.height = SLOT_DIMENSIONS.HEIGHT + "rem";
 
+  PLAYER.querySelector(".board__slot").style.width =
+    SLOT_DIMENSIONS.WIDTH + "rem";
+  PLAYER.querySelector(".board__slot").style.height =
+    SLOT_DIMENSIONS.HEIGHT + "rem";
+
   setSliderColor();
+  displayActivePlayer();
 
   for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
     for (let j = 0; j < BOARD_DIMENSIONS.COLUMNS; j++) {
@@ -89,6 +98,13 @@ function setSliderColor() {
 function moveSlider(jCoordinate) {
   const translateBy = jCoordinate * (SLOT_DIMENSIONS.WIDTH + GRID_GAP);
   SLIDER_ELEMENT.style.transform = `translateX(${translateBy}rem)`;
+}
+
+function displayActivePlayer() {
+  PLAYER.querySelector(".player__name").textContent =
+    activePlayer.name + " turn";
+  PLAYER.querySelector(".board__slot").style.backgroundColor =
+    activePlayer.color;
 }
 
 function computeSlotPosition(jValue) {

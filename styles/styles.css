@@ -8,6 +8,10 @@ html {
 }
 
 body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #000000e6;
   background-color: #dfdbe5;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
 }
@@ -25,12 +29,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .board {
   display: grid;
   border: 0.75rem solid var(--primaryColor);
-  border-radius: 4px;
+  border-radius: 0.5rem;
   padding: 1rem;
   background-color: var(--primaryColorLight);
 }
@@ -43,14 +48,27 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-.board__slot.active {
-  background-color: yellow;
-}
-
 .slider {
   color: #fff;
   text-align: center;
   font-size: 5rem;
   margin-left: 1.75rem;
   transition: transform 0.2s ease-in-out;
+}
+
+.player {
+  border: 2px solid var(--primaryColor);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.player__color-container {
+  border-radius: inherit;
+  background-color: var(--primaryColorLight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 2rem;
 }
