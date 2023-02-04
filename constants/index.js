@@ -20,3 +20,5 @@ export const PLAYERS = {
     color : 'red'
   }
 }
+
+export const WIN_COUNT = 4;

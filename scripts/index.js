@@ -6,7 +6,12 @@ import {
 } from "../constants/index.js";
 
 import debounceTime from "../utils/debounce.js";
+
+import checkWinner from "../utils/check-winner.js";
+
 // State
+
+const boardState = [];
 
 const filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
 
@@ -116,11 +121,23 @@ function computeSlotPosition(jValue) {
 }
 
 function fillSlot(i, j) {
+  boardState[i][j] = activePlayer.name;
   const slotNode = document.querySelector(`[data-i='${i}'][data-j='${j}']`);
   slotNode.style.backgroundColor = activePlayer.color;
+  if (checkWinner(boardState, i, j, activePlayer.name)) {
+    console.log("[Winner found]");
+  }
   toggleActivePlayer();
+}
+
+function initState() {
+  for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
+    boardState.push(new Array(BOARD_DIMENSIONS.COLUMNS));
+  }
 }
 
 // On Load
 
 createBoard();
+
+initState();
