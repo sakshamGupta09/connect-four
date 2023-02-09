@@ -42,7 +42,7 @@ function mouseoverHandler(e) {
 
 function boardClickHandler(e) {
   if (e.target.classList.contains("board__slot")) {
-    const jCoordinate = e.target.dataset.j;
+    const jCoordinate = parseInt(e.target.dataset.j);
     computeSlotPosition(jCoordinate);
   }
 }
