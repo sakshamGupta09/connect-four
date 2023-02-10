@@ -1,7 +1,6 @@
-:root {
-  --primaryColor: #3f00ff;
-  --primaryColorLight: #4169e1;
-}
+@import url("./variables.css");
+
+@import url("./modal.css");
 
 html {
   font-size: 100%;
