@@ -9,6 +9,8 @@ import debounceTime from "../utils/debounce.js";
 
 import checkWinner from "../utils/check-winner.js";
 
+import getModalNode from "../utils/modal.js";
+
 // State
 
 const boardState = [];
@@ -47,7 +49,30 @@ function boardClickHandler(e) {
   }
 }
 
+function displayWinnerModal() {
+  const modal = getModalNode(false, false);
+  modal.querySelector(".modal__body").appendChild(getWinnerModal());
+  document.body.appendChild(modal);
+  modal.addEventListener("click", removeModal.bind(this, modal));
+}
+
+function removeModal(modalNode) {
+  modalNode.remove();
+}
+
 // Utils
+
+function getWinnerModal() {
+  const node = document.createElement("div");
+  node.classList.add("winner__container");
+  node.innerHTML = `
+    <div class="winner">
+      <h2 class="winner__name">${activePlayer.name} Wins</h2>
+      <button class="btn">Play again</button>
+    </div>
+  `;
+  return node;
+}
 
 function toggleActivePlayer() {
   if (activePlayer.name === PLAYERS.P1.name) {
@@ -125,7 +150,8 @@ function fillSlot(i, j) {
   const slotNode = document.querySelector(`[data-i='${i}'][data-j='${j}']`);
   slotNode.style.backgroundColor = activePlayer.color;
   if (checkWinner(boardState, i, j, activePlayer.name)) {
-    console.log("[Winner found]");
+    displayWinnerModal();
+    return;
   }
   toggleActivePlayer();
 }
