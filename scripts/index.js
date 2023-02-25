@@ -1,9 +1,4 @@
-import {
-  BOARD_DIMENSIONS,
-  SLOT_DIMENSIONS,
-  GRID_GAP,
-  PLAYERS,
-} from "../constants/index.js";
+import { BOARD_DIMENSIONS, SLOT_DIMENSIONS, GRID_GAP, PLAYERS } from "../constants/index.js";
 
 import debounceTime from "../utils/debounce.js";
 
@@ -72,10 +67,10 @@ function setDefaultActivePlayer() {
 function resetState() {
   boardState = [];
   filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
-  initBoard();
+  initBoardState();
   BOARD_ELEMENT.innerHTML = ``;
-  createBoard();
   setDefaultActivePlayer();
+  createBoard(); 
 }
 
 function getWinnerModal() {
@@ -169,7 +164,8 @@ function fillSlot(i, j) {
   toggleActivePlayer();
 }
 
-function initBoard() {
+// Creates a 2D array representing our board.
+function initBoardState() {
   for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
     boardState.push(new Array(BOARD_DIMENSIONS.COLUMNS));
   }
@@ -177,7 +173,7 @@ function initBoard() {
 
 // On Load
 
-initBoard();
+initBoardState();
 
 setDefaultActivePlayer();
 
