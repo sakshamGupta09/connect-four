@@ -13,11 +13,11 @@ import getModalNode from "../utils/modal.js";
 
 // State
 
-const boardState = [];
+let boardState = [];
 
-const filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
+let filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
 
-let activePlayer = PLAYERS.P1;
+let activePlayer;
 
 // DOM elements
 
@@ -58,9 +58,25 @@ function displayWinnerModal() {
 
 function removeModal(modalNode) {
   modalNode.remove();
+  resetState();
 }
 
 // Utils
+
+function setDefaultActivePlayer() {
+  activePlayer = PLAYERS.P1;
+  displayActivePlayer();
+  setSliderColor();
+}
+
+function resetState() {
+  boardState = [];
+  filledColumns = new Array(BOARD_DIMENSIONS.COLUMNS).fill(0);
+  initBoard();
+  BOARD_ELEMENT.innerHTML = ``;
+  createBoard();
+  setDefaultActivePlayer();
+}
 
 function getWinnerModal() {
   const node = document.createElement("div");
@@ -111,9 +127,6 @@ function createBoard() {
   PLAYER.querySelector(".board__slot").style.height =
     SLOT_DIMENSIONS.HEIGHT + "rem";
 
-  setSliderColor();
-  displayActivePlayer();
-
   for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
     for (let j = 0; j < BOARD_DIMENSIONS.COLUMNS; j++) {
       BOARD_ELEMENT.appendChild(getSlotNode(i, j));
@@ -156,7 +169,7 @@ function fillSlot(i, j) {
   toggleActivePlayer();
 }
 
-function initState() {
+function initBoard() {
   for (let i = 0; i < BOARD_DIMENSIONS.ROWS; i++) {
     boardState.push(new Array(BOARD_DIMENSIONS.COLUMNS));
   }
@@ -164,6 +177,8 @@ function initState() {
 
 // On Load
 
-createBoard();
+initBoard();
 
-initState();
+setDefaultActivePlayer();
+
+createBoard();
